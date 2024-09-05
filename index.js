@@ -1,15 +1,15 @@
 const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
-const TOKEN = "Токен бота";
+const TOKEN = "7228200522:AAHTNR1-ETpyN2RH9Db2a179YEUIBT5tBWk";
 const server = express();
 const bot = new TelegramBot(TOKEN, {
     polling: true
 });
 const port = process.env.PORT || 5000;
-const gameName = "Короткое имя игры";
+const gameName = "CrimspixCoin";
 const queries = {};
-server.use(express.static(path.join(__dirname, 'Название корневой папки бэкэнда')));
+server.use(express.static(path.join(__dirname, 'crimspixCoinBot')));
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "Say /game if you want to play."));
 bot.onText(/start|game/, (msg) => bot.sendGame(msg.from.id, gameName));
 bot.on("callback_query", function (query) {
@@ -17,7 +17,7 @@ bot.on("callback_query", function (query) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
-        let gameurl = "Ссылка на игру в гитхабе";
+        let gameurl = "https://mstendo64.github.io/CrimspixCoinClicker/";
         bot.answerCallbackQuery({
             callback_query_id: query.id,
             url: gameurl
